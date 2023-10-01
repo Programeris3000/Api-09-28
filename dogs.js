@@ -63,15 +63,22 @@ fetch(`https://api.agify.io?name=${name}`)
   fetch(`https://api.nationalize.io?name=${name}`)
   .then(res => res.json())
   .then(data=>{
-    data.country.forEach(array=>{
-      for (const property in array) {
+    let numbersArray = []
+    data.country.forEach(item=>{
+      for(const property in item){
         const key = property
-        const value = array[property]
-        console.log(value)
-        // if(typeof value === 'number'){
-        // }
+        const value = item[property]
+        if(typeof value === 'number'){
+          numbersArray.push(value)
+        }
+        const maxNumber = Math.max(...numbersArray)
+        console.log(maxNumber)
       }
     })
+  
+    
+  })
+    
 
 
     // const nationality = data.nationality
@@ -79,7 +86,7 @@ fetch(`https://api.agify.io?name=${name}`)
     // const nationalityDisplay = document.createElement('span')
     // nationalityDisplay.textContent = output
     // personsDataWrapper.append(nationalityDisplay)
-  })
+ 
 
 
 })
